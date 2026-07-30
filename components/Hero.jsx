@@ -1,32 +1,52 @@
 export default function Hero() {
   return (
-    <section id="top" className="noise grid-bg relative min-h-screen overflow-hidden px-5 pb-16 pt-36 md:px-10 md:pt-44">
-      <div className="mx-auto max-w-[1440px]">
-        <div className="mb-12 flex items-center justify-between text-[10px] uppercase tracking-[.25em] text-bone/55 md:text-xs">
-          <span>Independent digital studio</span>
-          <span>Johannesburg / South Africa</span>
+    <section
+      id="top"
+      className="relative flex min-h-screen items-center bg-[#f7f7f5] px-6 py-24 text-black md:px-10"
+    >
+      <div className="mx-auto w-full max-w-7xl">
+        {/* Eyebrow */}
+        <div className="mb-12 flex flex-col gap-2 text-xs font-medium uppercase tracking-[0.3em] text-neutral-500 md:flex-row md:items-center md:justify-between">
+          <span>Creative Digital Agency</span>
+          <span>Johannesburg, South Africa</span>
         </div>
 
-        <h1 className="hero-title max-w-[1340px] font-display text-[17vw] font-semibold uppercase leading-[.76] tracking-[-.09em] md:text-[10.5rem]">
-          <span className="hero-line"><span>Digital ideas</span></span>
-          <span className="hero-line"><span>built to <em className="outline-text not-italic">move.</em></span></span>
+        {/* Heading */}
+        <h1 className="max-w-6xl font-display text-6xl font-semibold leading-[0.9] tracking-[-0.07em] md:text-[8.5rem]">
+          Digital products
+          <br />
+          crafted to grow
+          <br />
+          ambitious brands.
         </h1>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-12 md:items-end">
-          <p className="max-w-xl text-lg leading-relaxed text-bone/68 md:col-span-5 md:text-xl">
-            We design brands, websites and digital products that help ambitious businesses look sharper, work smarter and grow with confidence.
-          </p>
-          <div className="flex gap-3 md:col-span-4 md:col-start-9">
-            <a href="#work" className="button-pill group flex flex-1 items-center justify-between rounded-full border border-white/20 px-6 py-4 text-xs uppercase tracking-[.16em]">
-              Explore work <span>↘</span>
+        {/* Bottom Content */}
+        <div className="mt-20 grid gap-12 border-t border-black/10 pt-12 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-6">
+            <p className="max-w-xl text-lg leading-8 text-neutral-600">
+              Yaya Digital partners with founders and businesses to create
+              premium websites, memorable brands and high-performing digital
+              experiences that deliver real results.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-4 md:col-span-3 md:col-start-10">
+            <a
+              href="#work"
+              className="rounded-full border border-black px-7 py-4 text-center text-sm font-medium transition hover:bg-black hover:text-white"
+            >
+              View Our Work
             </a>
-            <a href="#contact" aria-label="Start a project" className="magnetic-button grid h-[52px] w-[52px] shrink-0 place-items-center rounded-full bg-acid text-xl text-ink">↗</a>
+
+            <a
+              href="#contact"
+              className="rounded-full bg-black px-7 py-4 text-center text-sm font-medium text-white transition hover:bg-neutral-800"
+            >
+              Start a Project
+            </a>
           </div>
         </div>
       </div>
-
-      <div className="hero-orb absolute -right-20 top-32 h-72 w-72 rounded-full bg-violet/40 blur-[100px]" />
-      <div className="absolute bottom-8 left-5 text-[10px] uppercase tracking-[.25em] text-bone/35 md:left-10">Scroll to discover ↓</div>
     </section>
   );
 }
