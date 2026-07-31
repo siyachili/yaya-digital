@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const links = [
   ["Work", "#work"],
@@ -12,6 +12,10 @@ const links = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
+
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -21,11 +25,76 @@ export default function Header() {
     };
   }, [open]);
 
-  const closeMenu = () => setOpen(false);
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
+    const updateHeaderVisibility = () => {
+      const currentScrollY = window.scrollY;
+      const isMobileOrTablet = window.innerWidth < 1024;
+      const scrollDifference = currentScrollY - lastScrollY.current;
+
+      if (!isMobileOrTablet) {
+        setHeaderVisible(true);
+        lastScrollY.current = currentScrollY;
+        ticking.current = false;
+        return;
+      }
+
+      if (open || currentScrollY < 80) {
+        setHeaderVisible(true);
+      } else if (scrollDifference > 8) {
+        setHeaderVisible(false);
+      } else if (scrollDifference < -8) {
+        setHeaderVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+      ticking.current = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking.current) {
+        window.requestAnimationFrame(updateHeaderVisibility);
+        ticking.current = true;
+      }
+    };
+
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setHeaderVisible(true);
+      }
+
+      lastScrollY.current = window.scrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [open]);
+
+  const closeMenu = () => {
+    setOpen(false);
+    setHeaderVisible(true);
+  };
+
+  const toggleMenu = () => {
+    setOpen((current) => !current);
+    setHeaderVisible(true);
+  };
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6 md:pt-5">
+      <header
+        className={`fixed inset-x-0 top-0 z-50 px-4 pt-4 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:px-6 md:pt-5 ${
+          headerVisible || open
+            ? "translate-y-0"
+            : "-translate-y-[calc(100%+1.5rem)]"
+        }`}
+      >
         <div className="mx-auto flex max-w-[1180px] items-center justify-between rounded-full border border-black/10 bg-black px-5 py-3.5 shadow-[0_12px_40px_rgba(0,0,0,0.18)] md:px-6">
           {/* Logo */}
           <a
@@ -73,8 +142,10 @@ export default function Header() {
           {/* Mobile and tablet menu button */}
           <button
             type="button"
-            onClick={() => setOpen((current) => !current)}
-            aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+            onClick={toggleMenu}
+            aria-label={
+              open ? "Close navigation menu" : "Open navigation menu"
+            }
             aria-expanded={open}
             className="relative z-[60] flex items-center gap-3 text-[10px] uppercase tracking-[0.18em] text-white lg:hidden"
           >
