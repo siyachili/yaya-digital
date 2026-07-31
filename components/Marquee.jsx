@@ -16,7 +16,7 @@ export default function Marquee() {
             className="flex items-center whitespace-nowrap font-display text-2xl font-semibold uppercase tracking-[-.04em] md:text-4xl"
           >
             <span className="mx-7">{x}</span>
-            <span>✳</span>
+            <span> - </span>
           </span>
         ))}
       </div>
