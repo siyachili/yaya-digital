@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const space = Space_Grotesk({ subsets: ["latin"], variable: "--font-space" });
 
 export const metadata = {
-  title: "Digital Leap — Creative Digital Agency",
+  title: "Yaya Digital — Creative Digital Agency",
   description: "Strategy, design and development for ambitious African brands.",
 };
 

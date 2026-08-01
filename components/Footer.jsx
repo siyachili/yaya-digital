@@ -64,7 +64,7 @@ export default function Footer() {
             <a href="#top">Back to top ↑</a>
           </div>
         </div>
-      </div>
+      </div> 
     </footer>
   );
 }

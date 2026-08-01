@@ -18,7 +18,7 @@ Open http://localhost:3000
 ## What changed in this iteration
 
 - New animated editorial hero
-- Real Digital Leap portfolio projects
+- Real Digital portfolio projects
 - Scroll reveal motion using the browser Intersection Observer
 - Interactive services accordion
 - Stronger hover behaviour and responsive project layouts
