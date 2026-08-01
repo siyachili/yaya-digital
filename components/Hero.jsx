@@ -8,7 +8,6 @@ export default function Hero() {
         {/* Eyebrow */}
         <div className="mb-12 flex flex-col gap-2 text-xs font-medium uppercase tracking-[0.3em] text-neutral-500 md:flex-row md:items-center md:justify-between">
           <span>Creative Digital Agency</span>
-          <span>Johannesburg, South Africa</span>
         </div>
 
         {/* Heading */}
@@ -25,7 +24,7 @@ export default function Hero() {
           <div className="md:col-span-6">
             <p className="max-w-xl text-lg leading-8 text-neutral-600">
               Yaya Digital partners with founders and businesses to create
-              premium websites, memorable brands and high-performing digital
+              premium websites for better presence online, memorable brands and high-performing digital
               experiences that deliver real results.
             </p>
           </div>

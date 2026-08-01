@@ -61,7 +61,6 @@ export default function Footer() {
 
           <div className="flex items-center gap-6">
             <a href="#">Instagram</a>
-            <a href="#">LinkedIn</a>
             <a href="#top">Back to top ↑</a>
           </div>
         </div>
