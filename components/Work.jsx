@@ -2,7 +2,7 @@ const project = {
   n: "01",
   title: "Brendon Bridge",
   image: "/images/brendon.jpeg",
-  url: "https://brendonbridge.com/",
+  url: "https://brendonbridgestudios.com/",
   meta: "A refined e-commerce home for a hyper-realistic artist, designed to let every artwork carry the room.",
   type: "Art / E-commerce",
   services: "Strategy · Web design · WordPress",
