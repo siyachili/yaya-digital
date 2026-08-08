@@ -13,7 +13,7 @@ const project = {
   type: "Art / Artist Portfolio",
   services: "Strategy · UI/UX Design · Next.js Development · CMS",
   result:
-    "A custom digital gallery that gives Brendon a refined online presence, flexible artwork management and a direct path from discovery to enquiry.",
+    "",
 };
 
 export default function Work() {
