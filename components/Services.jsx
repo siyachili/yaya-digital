@@ -7,14 +7,13 @@ const services = [
     number: "01",
     title: "Brand strategy",
     copy:
-      "Clear thinking before the design begins. We help shape how a brand should look, sound and position itself before translating that direction into digital.",
+      "We define the thinking behind the brand before translating it into a clear digital direction.",
     capabilities: [
       "Brand positioning",
-      "Creative direction",
       "Audience definition",
       "Competitor review",
+      "Creative direction",
       "Digital strategy",
-      "Website strategy",
       "Content direction",
     ],
   },
@@ -23,16 +22,13 @@ const services = [
     number: "02",
     title: "Identity & design",
     copy:
-      "Visual systems designed to give brands a distinctive and consistent presence across digital platforms.",
+      "Distinct visual systems that give brands a consistent and recognisable presence across digital platforms.",
     capabilities: [
-      "Art direction",
       "Visual identity",
+      "Art direction",
       "Typography",
       "Colour systems",
-      "Digital design systems",
-      "Social media design",
-      "UI design",
-      "Responsive design",
+      "Design systems",
     ],
   },
 
@@ -40,16 +36,14 @@ const services = [
     number: "03",
     title: "Web design",
     copy:
-      "Digital experiences shaped around clarity, storytelling and usability — from the first wireframe through to the final interface.",
+      "Thoughtful digital experiences built around clarity, usability and strong visual storytelling.",
     capabilities: [
       "Website architecture",
       "Wireframing",
-      "User experience design",
-      "User interface design",
-      "Portfolio websites",
-      "E-commerce experiences",
-      "Interactive experiences",
+      "UX/UI design",
       "Prototyping",
+      "E-commerce design",
+      "Interactive experiences",
     ],
   },
 
@@ -57,17 +51,12 @@ const services = [
     number: "04",
     title: "Development",
     copy:
-      "Modern websites built for performance, flexibility and long-term use, with technology selected around what the project actually needs.",
+      "Modern websites built for speed, flexibility and long-term use using the right technology for each project.",
     capabilities: [
-      "React / Next.js development",
-      "WordPress/ Shopify development",
-      "CMS",
+      "React / Next.js",
+      "WordPress / Shopify",
+      "CMS integration",
       "E-commerce development",
-      "API integrations",
-      "Responsive implementation",
-      "Cross-device testing",
-      "Performance optimisation",
-      "Technical support",
     ],
   },
 
@@ -75,18 +64,12 @@ const services = [
     number: "05",
     title: "Digital growth",
     copy:
-      "The work does not have to stop at launch. We help brands improve, maintain and evolve their digital presence over time.",
+      "Ongoing support to improve, maintain and evolve a brand's digital presence after launch.",
     capabilities: [
       "Website optimisation",
-      "Content updates",
-      "Campaign landing pages",
       "SEO",
       "Performance monitoring",
-      "Design support",
       "Website maintenance",
-      "Digital consulting",
-      "Ongoing development",
-      "Post-launch support",
     ],
   },
 ];
@@ -157,7 +140,6 @@ export default function Services() {
                       </div>
                     </button>
 
-                    {/* OPEN CONTENT */}
                     <div
                       className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
                         isActive
@@ -167,12 +149,10 @@ export default function Services() {
                     >
                       <div className="overflow-hidden">
                         <div className="pb-10 pl-12 md:pb-12 md:pl-[70px]">
-                          {/* DESCRIPTION */}
                           <p className="max-w-xl text-base leading-relaxed text-ink/55 md:text-lg">
                             {copy}
                           </p>
 
-                          {/* CAPABILITIES */}
                           <div className="mt-8 grid gap-x-8 gap-y-3 sm:grid-cols-2 md:mt-10">
                             {capabilities.map((capability) => (
                               <p
