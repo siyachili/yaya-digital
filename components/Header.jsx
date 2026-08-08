@@ -95,69 +95,77 @@ export default function Header() {
             : "-translate-y-[calc(100%+1.5rem)]"
         }`}
       >
-        {/* Logo */}
+        <div className="mx-auto flex max-w-[1180px] items-center justify-between rounded-full border border-black/10 bg-black px-5 py-3.5 shadow-[0_12px_40px_rgba(0,0,0,0.18)] md:px-6">
+          {/* Logo */}
+          <a
+            href="#top"
+            onClick={closeMenu}
+            className="relative z-[60] font-display text-lg font-semibold uppercase tracking-[-0.055em] text-white md:text-xl"
+          >
+            YAYA
+            <span className="ml-1 font-normal text-white/55">
+              DIGITAL
+            </span>
+          </a>
 
-        YAYA
+          {/* Desktop navigation */}
+          <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 lg:flex">
+            {links.slice(0, 4).map(([label, href]) => (
+              <a
+                key={href}
+                href={href}
+                className="group relative py-2 text-[10px] uppercase tracking-[0.18em] text-white/60 transition-colors duration-300 hover:text-white"
+              >
+                {label}
 
-        DIGITAL
+                <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
+              </a>
+            ))}
+          </nav>
 
-        {/* Desktop navigation */}
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 lg:flex">
-          {links.slice(0, 4).map(([label, href]) => (
-            <a
-              key={href}
-              href={href}
-              className="group relative py-2 text-[10px] uppercase tracking-[0.18em] text-white/60 transition-colors duration-300 hover:text-white"
-            >
-              {label}
+          {/* Desktop contact link */}
+          <a
+            href="#contact"
+            className="group hidden items-center gap-3 text-[10px] uppercase tracking-[0.18em] text-white lg:flex"
+          >
+            <span className="relative py-2">
+              Start a project
 
-              <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
-            </a>
-          ))}
-        </nav>
+              <span className="absolute bottom-0 left-0 h-px w-full origin-left bg-white transition-transform duration-300 group-hover:scale-x-0" />
+            </span>
 
-        {/* Desktop contact link */}
-        <a
-          href="#contact"
-          className="group hidden items-center gap-3 text-[10px] uppercase tracking-[0.18em] text-white lg:flex"
-        >
-          <span className="relative py-2">
-            Start a project
+            <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-white/25">
+              <span className="h-1.5 w-1.5 rounded-full bg-white transition-transform duration-500 group-hover:scale-[4]" />
+            </span>
+          </a>
 
-            <span className="absolute bottom-0 left-0 h-px w-full origin-left bg-white transition-transform duration-300 group-hover:scale-x-0" />
-          </span>
+          {/* Mobile and tablet menu button */}
+          <button
+            type="button"
+            onClick={toggleMenu}
+            aria-label={
+              open ? "Close navigation menu" : "Open navigation menu"
+            }
+            aria-expanded={open}
+            className="relative z-[60] flex items-center gap-3 text-[10px] uppercase tracking-[0.18em] text-white lg:hidden"
+          >
+            <span>{open ? "Close" : "Menu"}</span>
 
-          <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-white/25">
-            <span className="h-1.5 w-1.5 rounded-full bg-white transition-transform duration-500 group-hover:scale-[4]" />
-          </span>
-        </a>
+            <span className="relative flex h-8 w-8 items-center justify-center rounded-full border border-white/25">
+              <span
+                className={`absolute h-px w-3.5 bg-white transition-transform duration-300 ${
+                  open ? "rotate-45" : "-translate-y-1"
+                }`}
+              />
 
-        {/* Mobile and tablet menu button */}
-        <button
-          type="button"
-          onClick={toggleMenu}
-          aria-label={
-            open ? "Close navigation menu" : "Open navigation menu"
-          }
-          aria-expanded={open}
-          className="relative z-[60] flex items-center gap-3 text-[10px] uppercase tracking-[0.18em] text-white lg:hidden"
-        >
-          <span>{open ? "Close" : "Menu"}</span>
-
-          <span className="relative flex h-8 w-8 items-center justify-center rounded-full border border-white/25">
-            <span
-              className={`absolute h-px w-3.5 bg-white transition-transform duration-300 ${
-                open ? "rotate-45" : "-translate-y-1"
-              }`}
-            />
-
-            <span
-              className={`absolute h-px w-3.5 bg-white transition-transform duration-300 ${
-                open ? "-rotate-45" : "translate-y-1"
-              }`}
-            />
-          </span>
-        </button>
+              <span
+                className={`absolute h-px w-3.5 bg-white transition-transform duration-300 ${
+                  open ? "-rotate-45" : "translate-y-1"
+                }`}
+              />
+            </span>
+          </button>
+        </div>
       </header>
 
       {/* Mobile and tablet menu */}
@@ -190,6 +198,21 @@ export default function Header() {
                   }}
                 >
                   {label}
+                </span>
+
+                <span
+                  className={`text-xs tracking-[0.18em] text-white/30 transition-all duration-700 ${
+                    open
+                      ? "translate-x-0 opacity-100"
+                      : "translate-x-4 opacity-0"
+                  }`}
+                  style={{
+                    transitionDelay: open
+                      ? `${index * 70 + 240}ms`
+                      : "0ms",
+                  }}
+                >
+                  0{index + 1}
                 </span>
               </a>
             ))}
