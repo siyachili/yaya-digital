@@ -95,17 +95,16 @@ export default function Header() {
             : "-translate-y-[calc(100%+1.5rem)]"
         }`}
       >
-        <div className="mx-auto flex max-w-[1180px] items-center justify-between rounded-full border border-black/10 bg-black px-5 py-3.5 shadow-[0_12px_40px_rgba(0,0,0,0.18)] md:px-6">
+        <div className="relative mx-auto flex max-w-[1180px] items-center justify-between">
           {/* Logo */}
           <a
             href="#top"
             onClick={closeMenu}
-            className="relative z-[60] font-display text-lg font-semibold uppercase tracking-[-0.055em] text-white md:text-xl"
+            className="relative z-[60] flex flex-col font-display text-sm font-semibold uppercase leading-[0.82] tracking-[-0.04em] text-white"
+            aria-label="Yaya Digital home"
           >
-            YAYA
-            <span className="ml-1 font-normal text-white/55">
-              DIGITAL
-            </span>
+            <span>YAYA</span>
+            <span>DIGITAL</span>
           </a>
 
           {/* Desktop navigation */}
@@ -183,10 +182,10 @@ export default function Header() {
                 key={href}
                 href={href}
                 onClick={closeMenu}
-                className="group flex items-center justify-between border-b border-white/12 py-4 md:py-5"
+                className="group block border-b border-white/12 py-4 md:py-5"
               >
                 <span
-                  className={`font-display text-[clamp(2.7rem,11vw,5.8rem)] font-medium uppercase leading-[0.9] tracking-[-0.07em] text-white transition-all duration-700 ${
+                  className={`block font-display text-[clamp(2.7rem,11vw,5.8rem)] font-medium uppercase leading-[0.9] tracking-[-0.07em] text-white transition-all duration-700 ${
                     open
                       ? "translate-y-0 opacity-100"
                       : "translate-y-8 opacity-0"
@@ -199,25 +198,11 @@ export default function Header() {
                 >
                   {label}
                 </span>
-
-                <span
-                  className={`text-xs tracking-[0.18em] text-white/30 transition-all duration-700 ${
-                    open
-                      ? "translate-x-0 opacity-100"
-                      : "translate-x-4 opacity-0"
-                  }`}
-                  style={{
-                    transitionDelay: open
-                      ? `${index * 70 + 240}ms`
-                      : "0ms",
-                  }}
-                >
-                  0{index + 1}
-                </span>
               </a>
             ))}
           </nav>
 
+          {/* Bottom information */}
           <div
             className={`mt-10 flex items-end justify-between border-t border-white/12 pt-6 transition-all delay-500 duration-700 ${
               open
