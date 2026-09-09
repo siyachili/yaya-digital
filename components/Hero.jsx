@@ -1,47 +1,52 @@
+import { Roboto_Condensed } from "next/font/google";
+
+const displayFont = Roboto_Condensed({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
+});
+
 export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen items-center bg-[#f7f7f5] px-6 py-24 text-black md:px-10"
+      className="flex min-h-[calc(100vh-4rem)] items-center bg-[#f5f5f1] px-5 pb-10 pt-24 text-black sm:px-7 md:px-10 md:pb-12 md:pt-28 lg:px-12"
     >
-      <div className="mx-auto w-full max-w-7xl">
-        {/* Eyebrow */}
-        <div className="mb-12 flex flex-col gap-2 text-xs font-medium uppercase tracking-[0.3em] text-neutral-500 md:flex-row md:items-center md:justify-between">
-          <span>Creative Digital Agency</span>
+      <div className="mx-auto flex w-full max-w-[1400px] flex-col">
+        <div className="mb-12 flex items-center justify-between border-t border-black/20 pt-3 text-[10px] uppercase tracking-[0.14em] text-black/60 md:mb-16 md:text-[11px]">
+
         </div>
 
-        {/* Heading */}
-        <h1 className="max-w-6xl font-display text-6xl font-semibold leading-[0.9] tracking-[-0.07em] md:text-[8.5rem]">
-          Digital products
+        <h2
+          className={`${displayFont.className} max-w-[1200px] text-[clamp(3.75rem,9vw,8.75rem)] font-normal uppercase leading-[0.82] tracking-[-0.055em]`}
+        >
+          Building brands
           <br />
-          crafted to grow
+          and 
           <br />
-          ambitious brands.
-        </h1>
+          Digital experiences.
+        </h2>
 
-        {/* Bottom Content */}
-        <div className="mt-20 grid gap-12 border-t border-black/10 pt-12 md:grid-cols-12 md:items-end">
-          <div className="md:col-span-6">
-            <p className="max-w-xl text-lg leading-8 text-neutral-600">
-              Yaya Digital partners with founders and businesses to create
-              premium websites for better presence online, memorable brands and high-performing digital
-              experiences that deliver real results.
-            </p>
-          </div>
+        <div className="mt-14 grid gap-10 border-t border-black/20 pt-5 md:mt-20 md:grid-cols-12 md:items-start">
+          <p className="max-w-md text-base leading-7 text-black/70 md:col-span-5 md:text-lg md:leading-8">
+            Yaya Digital works with growing businesses to build clear brand
+            identities and thoughtful digital solutions that help them show up better
+            online.
+          </p>
 
-          <div className="flex flex-col gap-4 md:col-span-3 md:col-start-10">
+          <div className="flex items-center gap-8 md:col-span-4 md:col-start-9 md:justify-end">
             <a
-              href="#work"
-              className="rounded-full border border-black px-7 py-4 text-center text-sm font-medium transition hover:bg-black hover:text-white"
+              href="#clients"
+              className="border-b border-black pb-1 text-[11px] font-medium uppercase tracking-[0.12em] transition-opacity hover:opacity-50"
             >
-              View Our Work
+              Our clients
             </a>
 
             <a
               href="#contact"
-              className="rounded-full bg-black px-7 py-4 text-center text-sm font-medium text-white transition hover:bg-neutral-800"
+              className="border-b border-black pb-1 text-[11px] font-medium uppercase tracking-[0.12em] transition-opacity hover:opacity-50"
             >
-              Start a Project
+              Contact us
             </a>
           </div>
         </div>

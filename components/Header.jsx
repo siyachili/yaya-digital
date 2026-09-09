@@ -1,21 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const links = [
-  ["Work", "#work"],
-  ["Services", "#services"],
-  ["Process", "#process"],
+  ["Home", "#top"],
   ["About", "#about"],
-  ["Contact", "#contact"],
+  ["Services", "#services"],
+  ["Clients", "#clients"],
+  ["Contact Us", "#contact"],
 ];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const [headerVisible, setHeaderVisible] = useState(true);
-
-  const lastScrollY = useRef(0);
-  const ticking = useRef(false);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -26,141 +22,59 @@ export default function Header() {
   }, [open]);
 
   useEffect(() => {
-    lastScrollY.current = window.scrollY;
-
-    const updateHeaderVisibility = () => {
-      const currentScrollY = window.scrollY;
-      const isMobileOrTablet = window.innerWidth < 1024;
-      const scrollDifference = currentScrollY - lastScrollY.current;
-
-      if (!isMobileOrTablet) {
-        setHeaderVisible(true);
-        lastScrollY.current = currentScrollY;
-        ticking.current = false;
-        return;
-      }
-
-      if (open || currentScrollY < 80) {
-        setHeaderVisible(true);
-      } else if (scrollDifference > 8) {
-        setHeaderVisible(false);
-      } else if (scrollDifference < -8) {
-        setHeaderVisible(true);
-      }
-
-      lastScrollY.current = currentScrollY;
-      ticking.current = false;
-    };
-
-    const handleScroll = () => {
-      if (!ticking.current) {
-        window.requestAnimationFrame(updateHeaderVisibility);
-        ticking.current = true;
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
       }
     };
 
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setHeaderVisible(true);
-      }
-
-      lastScrollY.current = window.scrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [open]);
+  }, []);
 
   const closeMenu = () => {
     setOpen(false);
-    setHeaderVisible(true);
-  };
-
-  const toggleMenu = () => {
-    setOpen((current) => !current);
-    setHeaderVisible(true);
   };
 
   return (
     <>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 px-4 pt-4 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:px-6 md:pt-5 ${
-          headerVisible || open
-            ? "translate-y-0"
-            : "-translate-y-[calc(100%+1.5rem)]"
-        }`}
-      >
-        <div className="mx-auto flex max-w-[1180px] items-center justify-between rounded-full border border-black/10 bg-black px-5 py-3.5 shadow-[0_12px_40px_rgba(0,0,0,0.18)] md:px-6">
-          {/* Logo */}
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white text-black">
+        <div className="flex h-16 items-center justify-between px-5 sm:px-7 md:px-10 lg:px-12">
           <a
             href="#top"
             onClick={closeMenu}
-            className="relative z-[60] font-display text-lg font-semibold uppercase tracking-[-0.055em] text-white md:text-xl"
+            className="font-display text-[18px] font-semibold uppercase leading-none tracking-[-0.05em] md:text-[20px]"
           >
-            YAYA
-            <span className="ml-1 font-normal text-white/55">
-              DIGITAL
-            </span>
+            Yaya Digital
           </a>
 
-          {/* Desktop navigation */}
-          <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 lg:flex">
-            {links.slice(0, 4).map(([label, href]) => (
-              <a
-                key={href}
-                href={href}
-                className="group relative py-2 text-[10px] uppercase tracking-[0.18em] text-white/60 transition-colors duration-300 hover:text-white"
-              >
-                {label}
-
-                <span className="absolute bottom-0 left-0 h-px w-0 bg-white transition-all duration-300 group-hover:w-full" />
-              </a>
-            ))}
-          </nav>
-
-          {/* Desktop contact link */}
-          <a
-            href="#contact"
-            className="group hidden items-center gap-3 text-[10px] uppercase tracking-[0.18em] text-white lg:flex"
-          >
-            <span className="relative py-2">
-              Start a project
-
-              <span className="absolute bottom-0 left-0 h-px w-full origin-left bg-white transition-transform duration-300 group-hover:scale-x-0" />
-            </span>
-
-            <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-white/25">
-              <span className="h-1.5 w-1.5 rounded-full bg-white transition-transform duration-500 group-hover:scale-[4]" />
-            </span>
-          </a>
-
-          {/* Mobile and tablet menu button */}
           <button
             type="button"
-            onClick={toggleMenu}
+            onClick={() => setOpen((current) => !current)}
             aria-label={
-              open ? "Close navigation menu" : "Open navigation menu"
+              open
+                ? "Close navigation menu"
+                : "Open navigation menu"
             }
             aria-expanded={open}
-            className="relative z-[60] flex items-center gap-3 text-[10px] uppercase tracking-[0.18em] text-white lg:hidden"
+            aria-controls="site-navigation"
+            className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.14em]"
           >
             <span>{open ? "Close" : "Menu"}</span>
 
-            <span className="relative flex h-8 w-8 items-center justify-center rounded-full border border-white/25">
+            <span className="relative block h-4 w-5">
               <span
-                className={`absolute h-px w-3.5 bg-white transition-transform duration-300 ${
-                  open ? "rotate-45" : "-translate-y-1"
+                className={`absolute left-0 top-[5px] h-px w-5 bg-black transition-transform duration-300 ${
+                  open ? "translate-y-[3px] rotate-45" : ""
                 }`}
               />
 
               <span
-                className={`absolute h-px w-3.5 bg-white transition-transform duration-300 ${
-                  open ? "-rotate-45" : "translate-y-1"
+                className={`absolute bottom-[5px] left-0 h-px w-5 bg-black transition-transform duration-300 ${
+                  open ? "-translate-y-[3px] -rotate-45" : ""
                 }`}
               />
             </span>
@@ -168,79 +82,49 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile and tablet menu */}
       <div
-        className={`fixed inset-0 z-40 bg-black transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] lg:hidden ${
+        id="site-navigation"
+        className={`fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto bg-white text-black transition-opacity duration-300 ${
           open
-            ? "pointer-events-auto translate-y-0 opacity-100"
-            : "pointer-events-none -translate-y-full opacity-0"
+            ? "visible pointer-events-auto opacity-100"
+            : "invisible pointer-events-none opacity-0"
         }`}
       >
-        <div className="flex min-h-full flex-col px-5 pb-8 pt-28 md:px-10 md:pt-32">
-          <nav className="flex flex-1 flex-col justify-center">
-            {links.map(([label, href], index) => (
+        <div className="flex min-h-full flex-col px-5 py-8 sm:px-7 md:px-10 md:py-10 lg:px-12">
+          <nav className="mx-auto flex w-full max-w-[1400px] flex-1 flex-col justify-center">
+            {links.map(([label, href]) => (
               <a
                 key={href}
                 href={href}
                 onClick={closeMenu}
-                className="group flex items-center justify-between border-b border-white/12 py-4 md:py-5"
+                className="group border-b border-black/15 py-4 md:py-5"
               >
-                <span
-                  className={`font-display text-[clamp(2.7rem,11vw,5.8rem)] font-medium uppercase leading-[0.9] tracking-[-0.07em] text-white transition-all duration-700 ${
-                    open
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-8 opacity-0"
-                  }`}
-                  style={{
-                    transitionDelay: open
-                      ? `${index * 70 + 180}ms`
-                      : "0ms",
-                  }}
-                >
+                <span className="font-display text-[clamp(2.25rem,4.5vw,4.5rem)] font-medium leading-none tracking-[-0.055em] transition-opacity duration-200 group-hover:opacity-50">
                   {label}
-                </span>
-
-                <span
-                  className={`text-xs tracking-[0.18em] text-white/30 transition-all duration-700 ${
-                    open
-                      ? "translate-x-0 opacity-100"
-                      : "translate-x-4 opacity-0"
-                  }`}
-                  style={{
-                    transitionDelay: open
-                      ? `${index * 70 + 240}ms`
-                      : "0ms",
-                  }}
-                >
-                  0{index + 1}
                 </span>
               </a>
             ))}
           </nav>
 
-          <div
-            className={`mt-10 flex items-end justify-between border-t border-white/12 pt-6 transition-all delay-500 duration-700 ${
-              open
-                ? "translate-y-0 opacity-100"
-                : "translate-y-5 opacity-0"
-            }`}
-          >
+          <div className="mx-auto mt-12 flex w-full max-w-[1400px] flex-col gap-5 border-t border-black/15 pt-5 text-[11px] uppercase tracking-[0.12em] sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-white/35">
-                Based in
+              <p className="mb-1 text-black/45">
+                Business enquiries
               </p>
 
-              <p className="text-sm text-white/80">
-                Johannesburg, South Africa
-              </p>
+              <a
+                href="mailto:hello@yayadigital.co.za"
+                className="normal-case tracking-normal transition-opacity hover:opacity-50"
+              >
+                hello@yayadigital.co.za
+              </a>
             </div>
 
             <a
-              href="#contact"
-              onClick={closeMenu}
-              className="border-b border-white pb-1 text-[10px] uppercase tracking-[0.18em] text-white"
+              href="#"
+              className="w-fit transition-opacity hover:opacity-50"
             >
-              Start a project
+              Instagram
             </a>
           </div>
         </div>
