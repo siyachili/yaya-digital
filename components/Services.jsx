@@ -1,178 +1,164 @@
-"use client";
-
-import { useState } from "react";
-
 const services = [
   {
-    number: "01",
     title: "Brand strategy",
-    copy:
-      "We define the thinking behind the brand before translating it into a clear digital direction.",
+    headline: "Clarifying what your business stands for.",
+    description:
+      "We define your positioning, audience and direction before any design work begins.",
     capabilities: [
-      "Brand positioning",
-      "Audience definition",
+      "Positioning",
+      "Audience research",
       "Competitor review",
       "Creative direction",
-      "Digital strategy",
       "Content direction",
     ],
   },
-
   {
-    number: "02",
-    title: "Identity & design",
-    copy:
-      "Distinct visual systems that give brands a consistent and recognisable presence across digital platforms.",
+    title: "Identity design",
+    headline: "Building a brand people can recognise.",
+    description:
+      "We create the visual system your business needs to communicate clearly and consistently.",
     capabilities: [
       "Visual identity",
-      "Art direction",
+      "Logo systems",
       "Typography",
-      "Colour systems",
-      "Design systems",
+      "Colour",
+      "Brand guidelines",
     ],
   },
-
   {
-    number: "03",
     title: "Web design",
-    copy:
-      "Thoughtful digital experiences built around clarity, usability and strong visual storytelling.",
+    headline: "Making your business clear online.",
+    description:
+      "We design considered websites around your content, customers and commercial goals.",
     capabilities: [
-      "Website architecture",
-      "Wireframing",
-      "UX/UI design",
+      "Website strategy",
+      "Information architecture",
+      "UX and UI design",
       "Prototyping",
-      "E-commerce design",
-      "Interactive experiences",
+      "E-commerce",
     ],
   },
-
   {
-    number: "04",
     title: "Development",
-    copy:
-      "Modern websites built for speed, flexibility and long-term use using the right technology for each project.",
+    headline: "Turning the design into a reliable product.",
+    description:
+      "We build responsive websites that perform well and remain straightforward to manage.",
     capabilities: [
-      "React / Next.js",
-      "WordPress / Shopify",
-      "CMS integration",
-      "E-commerce development",
+      "Next.js",
+      "React",
+      "Shopify",
+      "WordPress",
+      "CMS development",
     ],
   },
-
   {
-    number: "05",
-    title: "Digital growth",
-    copy:
-      "Ongoing support to improve, maintain and evolve a brand's digital presence after launch.",
+    title: "Ongoing support",
+    headline: "Keeping the website useful after launch.",
+    description:
+      "We maintain, improve and extend your website as the needs of the business change.",
     capabilities: [
-      "Website optimisation",
-      "SEO",
-      "Performance monitoring",
-      "Website maintenance",
+      "Maintenance",
+      "Performance",
+      "SEO foundations",
+      "Content updates",
+      "Technical support",
     ],
   },
 ];
 
 export default function Services() {
-  const [active, setActive] = useState(null);
-
-  const toggleService = (index) => {
-    setActive((current) => (current === index ? null : index));
-  };
-
   return (
     <section
       id="services"
-      className="bg-white px-5 py-24 text-ink sm:px-7 md:px-10 md:py-32 lg:px-14 lg:py-40"
+      className="bg-white px-5 py-24 text-black sm:px-7 md:px-10 md:py-32 lg:px-12 lg:py-40"
     >
-      <div className="mx-auto max-w-[1180px]">
-        <div className="grid gap-14 md:grid-cols-12 md:gap-8">
-          {/* LEFT */}
-          <div className="md:col-span-4">
-            <p className="mb-5 text-xs uppercase tracking-[0.2em] text-ink/45">
-              What we do
-            </p>
+      <div className="mx-auto max-w-[1400px]">
+        {/* Introduction */}
+        <div className="grid gap-8 border-t border-black/20 pt-5 md:grid-cols-12">
+          <p className="text-xs uppercase tracking-[0.12em] text-black/50 md:col-span-3">
+            What we do
+          </p>
 
-            <h2 className="max-w-md font-display text-5xl font-semibold tracking-[-0.055em] md:text-6xl lg:text-7xl">
-              From first thought to full launch.
-            </h2>
+          <h2 className="max-w-4xl font-display text-[clamp(2.75rem,5vw,5.25rem)] font-medium leading-[0.94] tracking-[-0.045em] md:col-span-8 md:col-start-5">
+            Strategy, identity and digital execution.
+          </h2>
+        </div>
 
-            <p className="mt-7 max-w-sm leading-relaxed text-ink/55">
-              Strategy, design and development brought together to create
-              stronger digital experiences.
-            </p>
-          </div>
+        {/* Sticky panel stack */}
+        <div className="relative mt-20 md:mt-32">
+          {services.map(
+            (
+              {
+                title,
+                headline,
+                description,
+                capabilities,
+              },
+              index,
+            ) => {
+              const topPosition = 64 + index * 52;
 
-          {/* RIGHT */}
-          <div className="md:col-span-7 md:col-start-6">
-            {services.map(
-              ({ number, title, copy, capabilities }, index) => {
-                const isActive = active === index;
+              return (
+                <article
+                  key={title}
+                  className="relative border-x border-t border-black/20 bg-[#f0eee8] md:sticky"
+                  style={{
+                    top: `${topPosition}px`,
+                    zIndex: index + 1,
+                    boxShadow:
+                      index === 0
+                        ? "none"
+                        : "0 -14px 28px rgba(0, 0, 0, 0.035)",
+                  }}
+                >
+                  {/* Title that remains visible */}
+                  <div className="flex h-[52px] items-center border-b border-black/20 bg-[#f0eee8] px-5 sm:px-7 md:px-9 lg:px-10">
+                    <h3 className="font-display text-lg font-medium leading-none tracking-[-0.025em] md:text-xl">
+                      {title}
+                    </h3>
+                  </div>
 
-                return (
-                  <div
-                    key={number}
-                    className="border-t border-ink/20"
-                  >
-                    <button
-                      type="button"
-                      onClick={() => toggleService(index)}
-                      aria-expanded={isActive}
-                      className="group block w-full py-7 text-left md:py-8"
-                    >
-                      <div className="grid grid-cols-[48px_1fr_auto] items-center gap-3 md:grid-cols-[70px_1fr_auto]">
-                        <span className="text-xs text-ink/45">
-                          {number}
-                        </span>
-
-                        <h3 className="font-display text-3xl font-semibold tracking-[-0.035em] transition-opacity duration-300 group-hover:opacity-60 md:text-5xl">
-                          {title}
-                        </h3>
-
-                        <span
-                          className={`text-2xl font-light leading-none transition-transform duration-500 ease-out ${
-                            isActive ? "rotate-45" : "rotate-0"
-                          }`}
-                        >
-                          ＋
-                        </span>
+                  {/* Main panel content */}
+                  <div className="flex min-h-[430px] flex-col px-5 py-8 sm:px-7 md:min-h-[470px] md:px-9 md:py-10 lg:min-h-[500px] lg:px-10 lg:py-12">
+                    <div className="grid flex-1 gap-10 md:grid-cols-12">
+                      <div className="md:col-span-7">
+                        <p className="max-w-3xl font-display text-[clamp(2.4rem,4.4vw,4.5rem)] font-normal leading-[0.98] tracking-[-0.04em]">
+                          {headline}
+                        </p>
                       </div>
-                    </button>
 
-                    <div
-                      className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
-                        isActive
-                          ? "grid-rows-[1fr] opacity-100"
-                          : "grid-rows-[0fr] opacity-0"
-                      }`}
-                    >
-                      <div className="overflow-hidden">
-                        <div className="pb-10 pl-12 md:pb-12 md:pl-[70px]">
-                          <p className="max-w-xl text-base leading-relaxed text-ink/55 md:text-lg">
-                            {copy}
-                          </p>
+                      <div className="md:col-span-4 md:col-start-9">
+                        <p className="max-w-sm text-base leading-7 text-black/60">
+                          {description}
+                        </p>
+                      </div>
+                    </div>
 
-                          <div className="mt-8 grid gap-x-8 gap-y-3 sm:grid-cols-2 md:mt-10">
-                            {capabilities.map((capability) => (
-                              <p
-                                key={capability}
-                                className="border-b border-ink/10 pb-3 text-[15px] leading-relaxed text-ink/80 md:text-base"
-                              >
-                                {capability}
-                              </p>
-                            ))}
-                          </div>
-                        </div>
+                    <div className="mt-14 border-t border-black/20 pt-5">
+                      <div className="grid gap-5 md:grid-cols-12">
+                        <p className="text-[10px] uppercase tracking-[0.12em] text-black/45 md:col-span-3">
+                          Capabilities
+                        </p>
+
+                        <ul className="grid gap-x-8 gap-y-2 sm:grid-cols-2 md:col-span-8 md:col-start-5 lg:grid-cols-3">
+                          {capabilities.map((capability) => (
+                            <li
+                              key={capability}
+                              className="text-sm leading-6"
+                            >
+                              {capability}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
                   </div>
-                );
-              },
-            )}
+                </article>
+              );
+            },
+          )}
 
-            <div className="border-t border-ink/20" />
-          </div>
+          <div className="border-t border-black/20" />
         </div>
       </div>
     </section>
