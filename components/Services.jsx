@@ -1,67 +1,71 @@
+"use client";
+
 const services = [
   {
     title: "Brand strategy",
-    headline: "Clarifying what your business stands for.",
+    headline: "Giving the brand a clear place to stand.",
     description:
-      "We define your positioning, audience and direction before any design work begins.",
+      "We shape the thinking behind the brand — its position, audience, personality and creative direction.",
     capabilities: [
       "Positioning",
       "Audience research",
       "Competitor review",
-      "Creative direction",
+      "Brand direction",
       "Content direction",
     ],
   },
   {
     title: "Identity design",
-    headline: "Building a brand people can recognise.",
+    headline: "Creating a visual language people remember.",
     description:
-      "We create the visual system your business needs to communicate clearly and consistently.",
+      "We build distinctive identity systems that make a brand feel considered, recognisable and consistent.",
     capabilities: [
       "Visual identity",
       "Logo systems",
       "Typography",
-      "Colour",
+      "Colour systems",
       "Brand guidelines",
     ],
   },
   {
-    title: "Web design",
-    headline: "Making your business clear online.",
+    title: "Creative direction",
+    headline: "Shaping how the brand shows up in the world.",
     description:
-      "We design considered websites around your content, customers and commercial goals.",
+      "We develop the visual direction that connects identity, imagery, campaigns and digital touchpoints into one coherent expression.",
+    capabilities: [
+      "Art direction",
+      "Campaign direction",
+      "Digital content",
+      "Social design systems",
+      "Launch direction",
+    ],
+  },
+  {
+    title: "Web design",
+    headline: "Turning the brand into a digital experience.",
+    description:
+      "We design websites around strong ideas, clear information and thoughtful interactions — not templates.",
     capabilities: [
       "Website strategy",
       "Information architecture",
-      "UX and UI design",
+      "UX design",
+      "UI design",
       "Prototyping",
-      "E-commerce",
+      "E-commerce design",
     ],
   },
   {
-    title: "Development",
-    headline: "Turning the design into a reliable product.",
+    title: "Digital experiences",
+    headline: "Designing the details that make digital feel considered.",
     description:
-      "We build responsive websites that perform well and remain straightforward to manage.",
+      "We extend the brand through responsive systems, interaction and motion to create digital experiences that feel intentional at every screen size.",
     capabilities: [
-      "Next.js",
-      "React",
-      "Shopify",
-      "WordPress",
-      "CMS development",
-    ],
-  },
-  {
-    title: "Ongoing support",
-    headline: "Keeping the website useful after launch.",
-    description:
-      "We maintain, improve and extend your website as the needs of the business change.",
-    capabilities: [
-      "Maintenance",
-      "Performance",
-      "SEO foundations",
-      "Content updates",
-      "Technical support",
+      "Interaction design",
+      "Responsive systems",
+      "Motion direction",
+      "Design systems",
+      "Interactive experiences",
+      "Digital products",
     ],
   },
 ];
@@ -80,7 +84,7 @@ export default function Services() {
           </p>
 
           <h2 className="max-w-4xl font-display text-[clamp(2.6rem,11vw,5.25rem)] font-medium leading-[0.93] tracking-[-0.05em] md:col-span-8 md:col-start-5">
-            Strategy, identity and digital execution.
+            Strategy, identity and digital design.
           </h2>
         </div>
 
