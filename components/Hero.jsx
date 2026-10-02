@@ -61,23 +61,23 @@ export default function Header() {
   return (
     <>
       {/* HEADER */}
-      <header className="fixed inset-x-0 top-0 z-50 bg-white text-black">
-        <div className="mx-auto grid h-[68px] max-w-[1600px] grid-cols-[1fr_auto] items-center border-b border-black/15 px-5 sm:px-7 md:h-[74px] md:px-10 lg:px-12">
+      <header className="fixed inset-x-0 top-0 z-50 bg-[#f5f5f1] text-black">
+        <div className="mx-auto flex h-[68px] max-w-[1600px] items-center justify-between border-b border-black/15 px-5 sm:px-7 md:h-[74px] md:px-10 lg:px-12">
           {/* LOGO */}
           <a
             href="#top"
             onClick={closeMenu}
             aria-label="Yaya Digital home"
-            className="relative z-[60] flex h-full w-fit items-center"
+            className="relative z-[60] flex h-full items-center"
           >
-            <div className="flex h-[26px] items-center md:h-[30px]">
+            <div className="relative h-[34px] w-[130px] overflow-hidden md:h-[38px] md:w-[145px]">
               <Image
                 src="/images/yaya.png"
                 alt="Yaya Digital"
-                width={300}
-                height={100}
+                fill
                 priority
-                className="h-full w-auto max-w-[130px] object-contain mix-blend-multiply md:max-w-[145px]"
+                sizes="145px"
+                className="object-cover object-[center_48%] mix-blend-multiply"
               />
             </div>
           </a>
@@ -97,7 +97,7 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* MOBILE + TABLET MENU BUTTON */}
+          {/* MOBILE + TABLET MENU */}
           <button
             type="button"
             onClick={toggleMenu}
@@ -132,7 +132,7 @@ export default function Header() {
       {/* MOBILE + TABLET NAVIGATION */}
       <div
         id="site-navigation"
-        className={`fixed inset-x-0 bottom-0 top-[68px] z-40 bg-white text-black transition-[transform,visibility] duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] md:top-[74px] xl:hidden ${
+        className={`fixed inset-x-0 bottom-0 top-[68px] z-40 bg-[#f5f5f1] text-black transition-[transform,visibility] duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] md:top-[74px] xl:hidden ${
           open
             ? "visible translate-y-0"
             : "invisible -translate-y-full"
@@ -166,7 +166,7 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* MOBILE / TABLET FOOTER */}
+          {/* MOBILE + TABLET FOOTER */}
           <div
             className={`grid gap-7 border-t border-black/15 pt-5 transition-all duration-700 sm:grid-cols-2 sm:items-end ${
               open
