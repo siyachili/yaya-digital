@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const links = [
@@ -13,9 +14,6 @@ const links = [
 export default function Header() {
   const [open, setOpen] = useState(false);
 
-  /*
-   * Lock page scroll while mobile/tablet menu is open
-   */
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
 
@@ -24,9 +22,6 @@ export default function Header() {
     };
   }, [open]);
 
-  /*
-   * Close with Escape
-   */
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
@@ -41,10 +36,6 @@ export default function Header() {
     };
   }, []);
 
-  /*
-   * If viewport moves into desktop size,
-   * automatically close mobile/tablet menu.
-   */
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1280) {
@@ -71,15 +62,24 @@ export default function Header() {
     <>
       {/* HEADER */}
       <header className="fixed inset-x-0 top-0 z-50 bg-white text-black">
-        <div className="mx-auto grid h-[68px] max-w-[1600px] grid-cols-[1fr_auto] items-center border-b border-black/15 px-5 sm:px-7 md:h-[74px] md:px-10 lg:px-12 xl:grid-cols-[1fr_auto]">
-          {/* WORDMARK */}
+        <div className="mx-auto grid h-[68px] max-w-[1600px] grid-cols-[1fr_auto] items-center border-b border-black/15 px-5 sm:px-7 md:h-[74px] md:px-10 lg:px-12">
+          {/* LOGO */}
           <a
             href="#top"
             onClick={closeMenu}
             aria-label="Yaya Digital home"
-            className="relative z-[60] w-fit font-display text-[18px] font-semibold uppercase leading-none tracking-[-0.055em] md:text-[20px]"
+            className="relative z-[60] flex h-full w-fit items-center"
           >
-            Yaya Digital
+            <div className="relative h-[32px] w-[118px] overflow-hidden md:h-[34px] md:w-[126px]">
+              <Image
+                src="/images/yaya.png"
+                alt="Yaya Digital"
+                width={1280}
+                height={1280}
+                priority
+                className="absolute left-1/2 top-1/2 h-[126px] w-[126px] max-w-none -translate-x-1/2 -translate-y-[48%] object-contain md:h-[136px] md:w-[136px]"
+              />
+            </div>
           </a>
 
           {/* DESKTOP NAVIGATION */}
@@ -115,17 +115,13 @@ export default function Header() {
             <span className="relative flex h-8 w-8 items-center justify-center md:h-9 md:w-9">
               <span
                 className={`absolute h-px w-[18px] bg-black transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
-                  open
-                    ? "rotate-45"
-                    : "-translate-y-[3px]"
+                  open ? "rotate-45" : "-translate-y-[3px]"
                 }`}
               />
 
               <span
                 className={`absolute h-px w-[18px] bg-black transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
-                  open
-                    ? "-rotate-45"
-                    : "translate-y-[3px]"
+                  open ? "-rotate-45" : "translate-y-[3px]"
                 }`}
               />
             </span>
@@ -170,7 +166,7 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* MOBILE / TABLET FOOTER */}
+          {/* MOBILE + TABLET FOOTER */}
           <div
             className={`grid gap-7 border-t border-black/15 pt-5 transition-all duration-700 sm:grid-cols-2 sm:items-end ${
               open
