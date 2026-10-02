@@ -71,7 +71,7 @@ export default function Header() {
             className="relative z-[60] block w-fit"
           >
             <Image
-              src="/yaya.png"
+              src="/images/yaya.png"
               alt="Yaya Digital"
               width={140}
               height={50}
