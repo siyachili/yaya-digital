@@ -13,6 +13,9 @@ const links = [
 export default function Header() {
   const [open, setOpen] = useState(false);
 
+  /*
+   * Lock page scroll while mobile/tablet menu is open
+   */
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
 
@@ -21,6 +24,9 @@ export default function Header() {
     };
   }, [open]);
 
+  /*
+   * Close with Escape
+   */
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
@@ -32,6 +38,24 @@ export default function Header() {
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  /*
+   * If viewport moves into desktop size,
+   * automatically close mobile/tablet menu.
+   */
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1280) {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -47,17 +71,33 @@ export default function Header() {
     <>
       {/* HEADER */}
       <header className="fixed inset-x-0 top-0 z-50 bg-white text-black">
-        <div className="mx-auto flex h-[68px] max-w-[1600px] items-center justify-between border-b border-black/15 px-5 sm:px-7 md:h-[74px] md:px-10 lg:px-12">
+        <div className="mx-auto grid h-[68px] max-w-[1600px] grid-cols-[1fr_auto] items-center border-b border-black/15 px-5 sm:px-7 md:h-[74px] md:px-10 lg:px-12 xl:grid-cols-[1fr_auto]">
           {/* WORDMARK */}
           <a
             href="#top"
             onClick={closeMenu}
-            className="relative z-[60] font-display text-[18px] font-semibold uppercase leading-none tracking-[-0.055em] md:text-[20px]"
+            aria-label="Yaya Digital home"
+            className="relative z-[60] w-fit font-display text-[18px] font-semibold uppercase leading-none tracking-[-0.055em] md:text-[20px]"
           >
             Yaya Digital
           </a>
 
-          {/* MENU */}
+          {/* DESKTOP NAVIGATION */}
+          <nav className="hidden items-center gap-8 xl:flex 2xl:gap-10">
+            {links.map(([label, href]) => (
+              <a
+                key={href}
+                href={href}
+                className="group relative py-2 text-[10px] font-medium uppercase tracking-[0.16em] text-black/60 transition-colors duration-300 hover:text-black"
+              >
+                {label}
+
+                <span className="absolute bottom-0 left-0 h-px w-full origin-right scale-x-0 bg-black transition-transform duration-300 ease-out group-hover:origin-left group-hover:scale-x-100" />
+              </a>
+            ))}
+          </nav>
+
+          {/* MOBILE + TABLET MENU BUTTON */}
           <button
             type="button"
             onClick={toggleMenu}
@@ -66,15 +106,15 @@ export default function Header() {
             }
             aria-expanded={open}
             aria-controls="site-navigation"
-            className="group relative z-[60] flex items-center gap-4"
+            className="group relative z-[60] flex items-center gap-3 xl:hidden"
           >
             <span className="text-[10px] font-medium uppercase tracking-[0.16em] md:text-[11px]">
               {open ? "Close" : "Menu"}
             </span>
 
-            <span className="relative flex h-8 w-8 items-center justify-center rounded-full border border-black/20 transition-colors duration-300 group-hover:bg-black group-hover:text-white md:h-9 md:w-9">
+            <span className="relative flex h-8 w-8 items-center justify-center md:h-9 md:w-9">
               <span
-                className={`absolute h-px w-3.5 bg-current transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+                className={`absolute h-px w-[18px] bg-black transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
                   open
                     ? "rotate-45"
                     : "-translate-y-[3px]"
@@ -82,7 +122,7 @@ export default function Header() {
               />
 
               <span
-                className={`absolute h-px w-3.5 bg-current transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+                className={`absolute h-px w-[18px] bg-black transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
                   open
                     ? "-rotate-45"
                     : "translate-y-[3px]"
@@ -93,111 +133,78 @@ export default function Header() {
         </div>
       </header>
 
-      {/* FULL SCREEN NAVIGATION */}
+      {/* MOBILE + TABLET NAVIGATION */}
       <div
         id="site-navigation"
-        className={`fixed inset-x-0 bottom-0 top-[68px] z-40 bg-white text-black transition-[transform,visibility] duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] md:top-[74px] ${
+        className={`fixed inset-x-0 bottom-0 top-[68px] z-40 bg-white text-black transition-[transform,visibility] duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] md:top-[74px] xl:hidden ${
           open
             ? "visible translate-y-0"
-            : "invisible translate-y-[-100%]"
+            : "invisible -translate-y-full"
         }`}
       >
-        <div className="mx-auto flex h-full max-w-[1600px] flex-col px-5 pb-6 pt-8 sm:px-7 md:px-10 md:pb-8 md:pt-10 lg:px-12">
-          {/* MAIN MENU */}
-          <div className="grid flex-1 items-center lg:grid-cols-12">
-            <nav className="lg:col-span-8">
-              {links.map(([label, href], index) => (
-                <a
-                  key={href}
-                  href={href}
-                  onClick={closeMenu}
-                  className="group block overflow-hidden border-b border-black/15 py-[10px] sm:py-3 md:py-4"
+        <div className="mx-auto flex h-full max-w-[1600px] flex-col px-5 pb-6 sm:px-7 md:px-10 md:pb-8 lg:px-12">
+          {/* NAVIGATION */}
+          <nav className="flex flex-1 flex-col justify-center">
+            {links.map(([label, href], index) => (
+              <a
+                key={href}
+                href={href}
+                onClick={closeMenu}
+                className="group overflow-hidden border-b border-black/15 py-3 sm:py-4 md:py-5"
+              >
+                <span
+                  className={`block font-display text-[clamp(2.8rem,10vw,6.5rem)] font-medium leading-[0.88] tracking-[-0.065em] transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    open
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-full opacity-0"
+                  }`}
+                  style={{
+                    transitionDelay: open
+                      ? `${100 + index * 65}ms`
+                      : "0ms",
+                  }}
                 >
-                  <span
-                    className={`block font-display text-[clamp(2.8rem,10vw,7.8rem)] font-medium leading-[0.86] tracking-[-0.07em] transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-3 ${
-                      open
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-full opacity-0"
-                    }`}
-                    style={{
-                      transitionDelay: open
-                        ? `${120 + index * 70}ms`
-                        : "0ms",
-                    }}
-                  >
-                    {label}
-                  </span>
-                </a>
-              ))}
-            </nav>
+                  {label}
+                </span>
+              </a>
+            ))}
+          </nav>
 
-            {/* DESKTOP SIDE INFORMATION */}
-            <aside
-              className={`mt-12 hidden transition-all duration-700 lg:col-span-3 lg:col-start-10 lg:mt-0 lg:block ${
-                open
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-6 opacity-0"
-              }`}
-              style={{
-                transitionDelay: open ? "420ms" : "0ms",
-              }}
-            >
-              <div className="border-t border-black/15 pt-4">
-                <p className="mb-8 text-[9px] uppercase tracking-[0.18em] text-black/40">
-                  Studio
-                </p>
-
-                <p className="max-w-[260px] text-sm leading-6 text-black/70">
-                  Independent design studio creating identities and digital
-                  experiences for ambitious brands.
-                </p>
-              </div>
-
-              <div className="mt-10 border-t border-black/15 pt-4">
-                <p className="mb-3 text-[9px] uppercase tracking-[0.18em] text-black/40">
-                  New business
-                </p>
-
-                <a
-                  href="mailto:hello@yayadigital.co.za"
-                  className="text-sm transition-opacity duration-300 hover:opacity-45"
-                >
-                  hello@yayadigital.co.za
-                </a>
-              </div>
-            </aside>
-          </div>
-
-          {/* FOOTER */}
+          {/* MOBILE / TABLET FOOTER */}
           <div
-            className={`mt-8 grid gap-5 border-t border-black/15 pt-5 text-[10px] uppercase tracking-[0.14em] transition-all duration-700 sm:grid-cols-2 sm:items-end md:text-[11px] lg:grid-cols-12 ${
+            className={`grid gap-7 border-t border-black/15 pt-5 transition-all duration-700 sm:grid-cols-2 sm:items-end ${
               open
                 ? "translate-y-0 opacity-100"
-                : "translate-y-5 opacity-0"
+                : "translate-y-4 opacity-0"
             }`}
             style={{
-              transitionDelay: open ? "480ms" : "0ms",
+              transitionDelay: open ? "440ms" : "0ms",
             }}
           >
-            <div className="lg:col-span-4">
-              <p className="mb-1 text-black/35">
-                Based in
+            <div>
+              <p className="mb-2 text-[9px] uppercase tracking-[0.18em] text-black/35">
+                New business
               </p>
 
-              <p>Johannesburg, South Africa</p>
+              <a
+                href="mailto:hello@yayadigital.co.za"
+                className="text-[13px] transition-opacity duration-300 hover:opacity-50 md:text-sm"
+              >
+                hello@yayadigital.co.za
+              </a>
             </div>
 
-            <div className="flex gap-6 sm:justify-end lg:col-span-3 lg:col-start-10">
+            <div className="flex items-end justify-between gap-6 sm:justify-end">
               <a
                 href="#"
-                className="transition-opacity duration-300 hover:opacity-40"
+                className="text-[9px] uppercase tracking-[0.16em] transition-opacity duration-300 hover:opacity-40 md:text-[10px]"
               >
                 Instagram
               </a>
 
               <a
                 href="#"
-                className="transition-opacity duration-300 hover:opacity-40"
+                className="text-[9px] uppercase tracking-[0.16em] transition-opacity duration-300 hover:opacity-40 md:text-[10px]"
               >
                 LinkedIn
               </a>
