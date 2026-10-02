@@ -3,22 +3,24 @@
 const services = [
   {
     title: "Brand strategy",
-    headline: "Giving the brand a clear place to stand.",
+    label: "Direction",
+    headline: "Give the brand somewhere clear to stand.",
     description:
-      "We shape the thinking behind the brand — its position, audience, personality and creative direction.",
+      "We define the position, audience and creative direction that gives the brand a clear point of view before design begins.",
     capabilities: [
-      "Positioning",
-      "Audience research",
+      "Brand positioning",
+      "Audience definition",
       "Competitor review",
-      "Brand direction",
+      "Creative direction",
       "Content direction",
     ],
   },
   {
     title: "Identity design",
-    headline: "Creating a visual language people remember.",
+    label: "Expression",
+    headline: "Build a visual language people remember.",
     description:
-      "We build distinctive identity systems that make a brand feel considered, recognisable and consistent.",
+      "We translate strategy into a distinctive identity system designed to feel recognisable, coherent and ownable.",
     capabilities: [
       "Visual identity",
       "Logo systems",
@@ -29,22 +31,24 @@ const services = [
   },
   {
     title: "Creative direction",
-    headline: "Shaping how the brand shows up in the world.",
+    label: "World building",
+    headline: "Shape how the brand shows up.",
     description:
-      "We develop the visual direction that connects identity, imagery, campaigns and digital touchpoints into one coherent expression.",
+      "We create the visual direction that connects imagery, campaigns, content and digital touchpoints into one consistent world.",
     capabilities: [
       "Art direction",
       "Campaign direction",
       "Digital content",
-      "Social design systems",
+      "Social design",
       "Launch direction",
     ],
   },
   {
     title: "Web design",
-    headline: "Turning the brand into a digital experience.",
+    label: "Digital",
+    headline: "Turn the brand into an experience.",
     description:
-      "We design websites around strong ideas, clear information and thoughtful interactions — not templates.",
+      "We design considered digital experiences where structure, typography, imagery and interaction work together with purpose.",
     capabilities: [
       "Website strategy",
       "Information architecture",
@@ -54,114 +58,127 @@ const services = [
       "E-commerce design",
     ],
   },
-  {
-    title: "Digital experiences",
-    headline: "Designing the details that make digital feel considered.",
-    description:
-      "We extend the brand through responsive systems, interaction and motion to create digital experiences that feel intentional at every screen size.",
-    capabilities: [
-      "Interaction design",
-      "Responsive systems",
-      "Motion direction",
-      "Design systems",
-      "Interactive experiences",
-      "Digital products",
-    ],
-  },
 ];
 
 export default function Services() {
   return (
     <section
       id="services"
-      className="bg-white px-4 py-20 text-black sm:px-7 sm:py-24 md:px-10 md:py-32 lg:px-12 lg:py-40"
+      className="relative bg-[#f6f4ef] px-4 py-20 text-[#111111] sm:px-7 sm:py-24 md:px-10 md:py-32 lg:px-12 lg:py-40"
     >
-      <div className="mx-auto max-w-[1400px]">
-        {/* Introduction */}
-        <div className="grid gap-7 border-t border-black/20 pt-5 md:grid-cols-12 md:gap-8">
-          <p className="text-[10px] uppercase tracking-[0.14em] text-black/50 md:col-span-3 md:text-xs">
-            What we do
-          </p>
+      <div className="mx-auto max-w-[1440px]">
+        {/* INTRO */}
+        <div className="border-t border-black/20 pt-5 md:pt-6">
+          <div className="grid gap-10 md:grid-cols-12 md:gap-8">
+            <div className="md:col-span-3">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-black/40 md:text-[11px]">
+                What we do
+              </p>
+            </div>
 
-          <h2 className="max-w-4xl font-display text-[clamp(2.6rem,11vw,5.25rem)] font-medium leading-[0.93] tracking-[-0.05em] md:col-span-8 md:col-start-5">
-            Strategy, identity and digital design.
-          </h2>
+            <div className="md:col-span-8 md:col-start-5">
+              <h2 className="max-w-[1050px] font-display text-[clamp(3rem,8vw,7rem)] font-medium leading-[0.9] tracking-[-0.065em]">
+                We shape brands
+                <br />
+                from idea to experience.
+              </h2>
+
+              <div className="mt-8 grid gap-5 md:mt-12 md:grid-cols-2 md:gap-10">
+                <p className="max-w-md text-sm leading-6 text-black/55 md:text-[15px] md:leading-7">
+                  Strategy gives the brand direction. Design gives it
+                  character.
+                </p>
+
+                <p className="max-w-md text-sm leading-6 text-black/55 md:text-[15px] md:leading-7">
+                  We bring both together across identity, creative and digital
+                  experiences.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Sticky card stack */}
-        <div className="relative mt-16 md:mt-32">
-          {services.map(
-            (
-              {
-                title,
-                headline,
-                description,
-                capabilities,
-              },
-              index,
-            ) => {
-              const mobileTop = 64 + index * 44;
-              const desktopTop = 64 + index * 52;
+        {/* SERVICES STACK */}
+        <div className="relative mt-20 md:mt-36">
+          {services.map((service, index) => {
+            const mobileTop = 64 + index * 46;
+            const desktopTop = 76 + index * 58;
 
-              return (
-                <article
-                  key={title}
-                  className="sticky top-[var(--mobile-top)] border-x border-t border-black/20 bg-[#f0eee8] shadow-[0_-12px_24px_rgba(0,0,0,0.035)] md:top-[var(--desktop-top)]"
-                  style={{
-                    "--mobile-top": `${mobileTop}px`,
-                    "--desktop-top": `${desktopTop}px`,
-                    zIndex: index + 1,
-                  }}
-                >
-                  {/* Persistent service title */}
-                  <div className="flex h-11 items-center border-b border-black/20 bg-[#f0eee8] px-4 sm:px-6 md:h-[52px] md:px-9 lg:px-10">
+            return (
+              <article
+                key={service.title}
+                className="sticky top-[var(--mobile-top)] overflow-hidden border-x border-t border-black/20 bg-[#ebe8e1] md:top-[var(--desktop-top)]"
+                style={{
+                  "--mobile-top": `${mobileTop}px`,
+                  "--desktop-top": `${desktopTop}px`,
+                  zIndex: index + 1,
+                }}
+              >
+                {/* PERSISTENT TAB */}
+                <div className="grid h-[46px] grid-cols-[1fr_auto] items-center border-b border-black/15 bg-[#ebe8e1] px-4 sm:px-6 md:h-[58px] md:grid-cols-12 md:px-9 lg:px-10">
+                  <div className="md:col-span-8">
                     <h3 className="font-display text-base font-medium leading-none tracking-[-0.025em] sm:text-lg md:text-xl">
-                      {title}
+                      {service.title}
                     </h3>
                   </div>
 
-                  {/* Active card */}
-                  <div className="flex min-h-[calc(100svh-var(--mobile-top)-2.75rem)] flex-col px-4 py-7 sm:px-6 sm:py-8 md:min-h-[calc(100svh-var(--desktop-top)-3.25rem)] md:px-9 md:py-10 lg:px-10 lg:py-12">
-                    <div className="grid flex-1 content-start gap-7 md:grid-cols-12 md:gap-10">
-                      {/* Main statement */}
-                      <div className="md:col-span-7">
-                        <p className="max-w-3xl font-display text-[clamp(2.2rem,10vw,4.5rem)] font-normal leading-[0.97] tracking-[-0.045em]">
-                          {headline}
-                        </p>
-                      </div>
+                  <div className="flex items-center gap-4 md:col-span-4 md:justify-between">
+                    <span className="hidden text-[9px] uppercase tracking-[0.18em] text-black/35 md:block">
+                      {service.label}
+                    </span>
 
-                      {/* Description */}
-                      <div className="md:col-span-4 md:col-start-9">
-                        <p className="max-w-sm text-[15px] leading-6 text-black/60 md:text-base md:leading-7">
-                          {description}
-                        </p>
-                      </div>
+                    <span className="text-[10px] tabular-nums tracking-[0.12em] text-black/30">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                </div>
+
+                {/* SERVICE BODY */}
+                <div className="flex min-h-[72svh] flex-col px-4 py-8 sm:px-6 sm:py-9 md:min-h-[76svh] md:px-9 md:py-12 lg:px-10 lg:py-14">
+                  {/* MAIN */}
+                  <div className="grid flex-1 content-start gap-10 md:grid-cols-12 md:gap-8">
+                    <div className="md:col-span-7">
+                      <p className="mb-5 text-[9px] uppercase tracking-[0.18em] text-black/35 md:text-[10px]">
+                        {service.label}
+                      </p>
+
+                      <h4 className="max-w-[900px] font-display text-[clamp(2.8rem,7.5vw,6.4rem)] font-normal leading-[0.9] tracking-[-0.06em]">
+                        {service.headline}
+                      </h4>
                     </div>
 
-                    {/* Capabilities */}
-                    <div className="mt-10 border-t border-black/20 pt-4 md:mt-14 md:pt-5">
-                      <div className="grid gap-4 md:grid-cols-12 md:gap-5">
-                        <p className="text-[9px] uppercase tracking-[0.14em] text-black/45 md:col-span-3 md:text-[10px]">
-                          Capabilities
-                        </p>
-
-                        <ul className="grid grid-cols-2 gap-x-5 gap-y-2 md:col-span-8 md:col-start-5 md:grid-cols-3 md:gap-x-8">
-                          {capabilities.map((capability) => (
-                            <li
-                              key={capability}
-                              className="border-b border-black/15 pb-2 text-[13px] leading-5 md:text-sm md:leading-6"
-                            >
-                              {capability}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                    <div className="md:col-span-4 md:col-start-9 md:pt-8">
+                      <p className="max-w-[390px] text-[15px] leading-6 text-black/55 md:text-base md:leading-7">
+                        {service.description}
+                      </p>
                     </div>
                   </div>
-                </article>
-              );
-            },
-          )}
+
+                  {/* CAPABILITIES */}
+                  <div className="mt-14 border-t border-black/20 pt-5 md:mt-20 md:pt-6">
+                    <div className="grid gap-7 md:grid-cols-12 md:gap-8">
+                      <div className="md:col-span-3">
+                        <p className="text-[9px] uppercase tracking-[0.18em] text-black/35 md:text-[10px]">
+                          Selected capabilities
+                        </p>
+                      </div>
+
+                      <ul className="grid grid-cols-2 gap-x-6 gap-y-0 md:col-span-8 md:col-start-5 md:grid-cols-2 md:gap-x-12">
+                        {service.capabilities.map((capability) => (
+                          <li
+                            key={capability}
+                            className="border-b border-black/15 py-3 text-[13px] leading-5 tracking-[-0.01em] text-black/75 md:text-sm md:leading-6"
+                          >
+                            {capability}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
 
           <div className="border-t border-black/20" />
         </div>
