@@ -68,16 +68,18 @@ export default function Header() {
             href="#top"
             onClick={closeMenu}
             aria-label="Yaya Digital home"
-            className="relative z-[60] block w-fit"
+            className="relative z-[60] flex h-full w-fit items-center"
           >
-            <Image
-              src="/images/yaya.png"
-              alt="Yaya Digital"
-              width={140}
-              height={50}
-              priority
-              className="h-auto w-[92px] object-contain sm:w-[100px] md:w-[110px] lg:w-[116px]"
-            />
+            <div className="flex h-[26px] items-center md:h-[30px]">
+              <Image
+                src="/images/yaya.png"
+                alt="Yaya Digital"
+                width={300}
+                height={100}
+                priority
+                className="h-full w-auto max-w-[130px] object-contain mix-blend-multiply md:max-w-[145px]"
+              />
+            </div>
           </a>
 
           {/* DESKTOP NAVIGATION */}
@@ -113,17 +115,13 @@ export default function Header() {
             <span className="relative flex h-8 w-8 items-center justify-center md:h-9 md:w-9">
               <span
                 className={`absolute h-px w-[18px] bg-black transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
-                  open
-                    ? "rotate-45"
-                    : "-translate-y-[3px]"
+                  open ? "rotate-45" : "-translate-y-[3px]"
                 }`}
               />
 
               <span
                 className={`absolute h-px w-[18px] bg-black transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${
-                  open
-                    ? "-rotate-45"
-                    : "translate-y-[3px]"
+                  open ? "-rotate-45" : "translate-y-[3px]"
                 }`}
               />
             </span>
@@ -204,7 +202,7 @@ export default function Header() {
                 href="#"
                 className="text-[9px] uppercase tracking-[0.16em] transition-opacity duration-300 hover:opacity-40 md:text-[10px]"
               >
-                
+                LinkedIn
               </a>
             </div>
           </div>
